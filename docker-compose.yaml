@@ -1,0 +1,10 @@
+services:
+  rss:
+    build: ./
+    container_name: rss
+    platform: linux/amd64
+    environment:
+      - CONFIG_FILE=/config.yaml
+      - LOG_LEVEL=DEBUG
+    volumes:
+      - ./config.yaml:/config.yaml:ro

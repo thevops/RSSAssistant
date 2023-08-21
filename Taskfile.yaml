@@ -1,0 +1,12 @@
+version: '3'
+
+tasks:
+  docker-build:
+    desc: Build Docker image
+    cmds:
+      - docker build -t rss .
+
+  compose-up:
+    desc: Run Docker Compose
+    cmds:
+      - docker-compose up -d
