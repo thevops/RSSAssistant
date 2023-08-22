@@ -27,6 +27,8 @@ def main():
             send_latest_feeds,
             trigger=CronTrigger.from_crontab(job["schedule"]),
             kwargs=job,
+            max_instances=1,
+            misfire_grace_time=60, # 1 minute
         )
         logger.info("Added RSSFeed job: %s" % job["name"])
 

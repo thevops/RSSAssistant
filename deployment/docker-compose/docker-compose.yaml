@@ -1,6 +1,6 @@
 services:
   rss-assistant:
-    build: ./
+    image: ghcr.io/thevops/rss-assistant:v1.0.0
     container_name: rss-assistant
     platform: linux/amd64
     environment:

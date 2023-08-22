@@ -24,18 +24,17 @@ RUN pip install --disable-pip-version-check -r /requirements.txt
 #
 # Stage 2
 #
+# FROM gcr.io/distroless/python3-debian11:debug AS production
 FROM gcr.io/distroless/python3-debian11 AS production
-
-COPY --from=build /venv /venv
-ENV VIRTUAL_ENV=/venv
-ENV PATH="$VIRTUAL_ENV/bin:$PATH"
-
-WORKDIR /app
-COPY ./src/ /app
 
 ENV TZ=Europe/Warsaw
 ENV PYTHONUNBUFFERED=1
 ENV VIRTUAL_ENV=/venv
 ENV PATH="$VIRTUAL_ENV/bin:$PATH"
+
+COPY --from=build /venv /venv
+
+WORKDIR /app
+COPY ./ /app
 
 ENTRYPOINT ["python", "main.py"]

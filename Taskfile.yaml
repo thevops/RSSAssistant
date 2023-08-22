@@ -4,9 +4,30 @@ tasks:
   docker-build:
     desc: Build Docker image
     cmds:
-      - docker build -t rss .
+      - docker build -t ghcr.io/thevops/rss-assistant:{{.VERSION}} .
+    vars:
+      VERSION:
+        sh: cat VERSION
+
+  docker-push:
+    desc: Push Docker image
+    cmds:
+      - docker push ghcr.io/thevops/rss-assistant:{{.VERSION}}
+    vars:
+      VERSION:
+        sh: cat VERSION
 
   compose-up:
-    desc: Run Docker Compose
+    desc: Run Docker Compose Up
     cmds:
-      - docker-compose up -d
+      - docker compose up --build -d
+
+  compose-down:
+    desc: Run Docker Compose Down
+    cmds:
+      - docker compose down
+
+  compose-logs:
+    desc: Stream logs from Docker Compose
+    cmds:
+      - docker compose logs -f
