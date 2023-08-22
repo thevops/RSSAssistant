@@ -1,8 +1,9 @@
 services:
   rss-assistant:
-    image: ghcr.io/thevops/rss-assistant:v1.0.0
+    image: ghcr.io/thevops/rss-assistant:latest
     container_name: rss-assistant
     platform: linux/amd64
+    restart: unless-stopped
     environment:
       - CONFIG_FILE=/config.yaml
       - LOG_LEVEL=DEBUG
