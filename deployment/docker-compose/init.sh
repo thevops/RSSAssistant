@@ -1,7 +1,7 @@
 #!/usr/bin/env bash
 
 # Prepare database directory
-mkdir db
+mkdir -p db
 
 # Create configuration file
 touch config.yaml
