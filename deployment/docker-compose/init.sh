@@ -7,7 +7,7 @@ mkdir db
 touch config.yaml
 
 # Download docker-compose.yaml
-wget https://raw.githubusercontent.com/thevops/RSSAssistant/master/deployment/docker-compose/docker-compose.yaml
+curl -sL https://raw.githubusercontent.com/thevops/RSSAssistant/master/deployment/docker-compose/docker-compose.yaml -o docker-compose.yaml
 
 # Pull Docker image
 docker compose pull
