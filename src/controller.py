@@ -16,7 +16,7 @@ def send_latest_feeds(**kwargs):
     name = kwargs["name"]
     logger.debug(f"{name} | start")
     url = kwargs["url"]
-    history_limit = kwargs["history_limit"] if "history_limit" in kwargs else 10
+    history_limit = kwargs["history_limit"] if "history_limit" in kwargs else None
     receiver_name = kwargs["receiver"]
     # get receiver details by its name
     receiver = get_receiever_by_name(receiver_name)

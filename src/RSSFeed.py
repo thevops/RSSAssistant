@@ -6,9 +6,9 @@ import pickledb
 
 
 class RSSFeed:
-    def __init__(self, link, database_dir="db/", history_limit=100):
+    def __init__(self, link, database_dir="db/", history_limit=None):
         self.link = link
-        self.history_limit = history_limit
+        self.history_limit = history_limit or 100
         # File name for storing the database is separate for each link
         # The name is created by hashing the link
         self.database_path = (
