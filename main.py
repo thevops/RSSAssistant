@@ -17,6 +17,7 @@ def exit_handler(signal_received, frame):
 
 
 def main():
+    logger.info("Starting RSSFeed")
     # Setup signal handlers
     signal.signal(signal.SIGINT, exit_handler)
     signal.signal(signal.SIGTERM, exit_handler)
@@ -33,6 +34,7 @@ def main():
         logger.info("Added RSSFeed job: %s" % job["name"])
 
     # Run schedulers infinite loop
+    logger.info("Starting RSSFeed scheduler loop")
     SCHEDULER.start()
 
 

@@ -75,7 +75,12 @@ class Notification:
         body = item["body"]
         url = receiver["url"]
 
-        apobj = apprise.Apprise()
+        # Clean up the asset - it is used in notifications body
+        asset = apprise.AppriseAsset()
+        asset.app_id = ""
+        asset.app_url = ""
+
+        apobj = apprise.Apprise(asset=asset)
         apobj.add(url)
 
         # Discord has a limit of 2000 characters per message
