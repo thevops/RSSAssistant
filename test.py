@@ -1,6 +1,7 @@
 from src.config import CONFIG
 from src.controller import send_latest_feeds
 from src.RSSFeed import RSSFeed
+from src.notifications import Notification
 
 
 # TEST FUNCTIONS
@@ -32,9 +33,22 @@ def test_full_1():
     for job in CONFIG["jobs"]:
         send_latest_feeds(**job)
 
+def test_http_request():
+    url = "https://hook.eu2.make.com/....."
+    item = {
+        "title": "This is an example task",
+        "body": "With an example body content"
+    }
+    receiver = {
+        "type": "http_request",
+        "url": url
+    }
+    Notification.http_request(item, receiver)
+
 
 # RUN TESTS
 # test_RSSFeed_1()
 # test_RSSFeed_2()
 # test_RSSFeed_3()
-test_full_1()
+# test_full_1()
+test_http_request()

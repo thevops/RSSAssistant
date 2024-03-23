@@ -6,6 +6,7 @@ import tempfile
 import apprise
 from json_dict_transformer import translateDictToDict
 from pytube import YouTube
+import requests
 from todoist_api_python.api import TodoistAPI
 
 from src.config import logger
@@ -53,6 +54,8 @@ class Notification:
             return Notification.echo(item, receiver)
         elif receiver["type"] == "todoist":
             return Notification.todoist(item, receiver)
+        elif receiver["type"] == "http_request":
+            return Notification.http_request(item, receiver)
         else:
             return False
 
@@ -121,3 +124,26 @@ class Notification:
         except Exception as error:
             logger.error(f"Cannot add task {title}: {error}")
             return False
+
+    @staticmethod
+    def http_request(item, receiver):
+        """
+        Send an HTTP request to a specified endpoint.
+        It can be used to send a notification to a custom service like make.com
+        to trigger a webhook.
+        """
+        title = item["title"]
+        body = item["body"]
+        url = receiver["url"]
+
+        try:
+            response = requests.post(
+                url,
+                json={"title": title, "body": body},
+            )
+            response.raise_for_status()
+        except Exception as error:
+            logger.error(f"Cannot send a request to {url}: {error}")
+            return False
+
+        return True
